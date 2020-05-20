@@ -1,0 +1,10 @@
+{
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/",
+      "Core\\": "boot/"
+    },
+    "files": ["boot/Helpers/functions.php"]
+  }
+
+}
