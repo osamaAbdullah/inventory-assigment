@@ -2,8 +2,10 @@
 
 namespace Core;
 
+use function dd;
 use Exception;
-use function stat;
+use function redirect;
+use function url;
 
 class Router {
 	
@@ -12,19 +14,18 @@ class Router {
 	
 	}
 	
-	public static function load($routes)
-	{
-		$router = new static();
-		require $routes;
-		return $router;
-	}
-
 	private static $routes = [
 		'GET' => [],
 		'POST' => [],
 		'PUT' => [],
 		'DELETE' => [],
 	];
+	
+	public static function register()
+	{
+		require_once '../app/Routes/web.php';
+		return new static;
+	}
 	
 	public function get($uri, $controller)
 	{
@@ -48,7 +49,8 @@ class Router {
 			);
 		}
 		
-		throw new Exception('no Routes defined for this uri');
+		return redirect(url('/page-not-found'));
+//		throw new Exception('no Routes defined for this uri');
 	}
 	
 	private function fireAction($controller, $action)

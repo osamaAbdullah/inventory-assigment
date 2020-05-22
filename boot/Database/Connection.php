@@ -10,13 +10,13 @@ class Connection {
 	
 	public static function connect()
 	{
-		$config = (require App::rootPath() . '/config/Database.php')['Database'];
+		$bdConf = (require App::rootPath() . '/config/Database.php')['Database'];
 		try {
 			$db = new PDO(
-				"{$config['connection']};dbname={$config['name']}",
-				$config['username'],
-				$config['password'],
-				$config['options']
+				"{$bdConf['connection']};dbname={$bdConf['name']}",
+				$bdConf['username'],
+				$bdConf['password'],
+				$bdConf['options']
 			);
 		} catch (PDOException $exception) {
 			die($exception->getMessage());

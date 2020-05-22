@@ -14,5 +14,10 @@ function view(string $fileName, $data = [])
 
 function redirect($path)
 {
-	header('Location: /' . $path);
+	return header('Location: ' . $path);
+}
+
+function url($path)
+{
+	return (require App::rootPath() . '/config/app.php')['root-url'] . $path;
 }

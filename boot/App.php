@@ -26,5 +26,10 @@ class App {
 		return __DIR__ . '\\..';
 	}
 	
+	public static function boot()
+	{
+		Router::register()->trigger();
+	}
+	
 	
 }
