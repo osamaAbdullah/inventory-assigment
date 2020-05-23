@@ -3,10 +3,10 @@
 namespace Core\Auth;
 
 use Core\Database\Connection;
-use function dd;
-use function intval;
+use Exception;
 use Jasny\Auth;
 use PDO;
+use function sizeof;
 
 class AuthStorage implements Auth\StorageInterface
 {
@@ -23,7 +23,12 @@ class AuthStorage implements Auth\StorageInterface
 	{
 		$query = $this->DB->prepare('SELECT * FROM users WHERE id = :id ;');
 		$query->execute([':id' => intval($id)]);
-		return $query->fetchAll(PDO::FETCH_CLASS, User::class)[0];
+		$user = $query->fetchAll(PDO::FETCH_CLASS, User::class);
+		if (sizeof($user) > 0) {
+			return $user[0];
+		} else {
+			throw new Exception('no user found');
+		}
 	}
 	
 	/**
@@ -33,7 +38,12 @@ class AuthStorage implements Auth\StorageInterface
 	{
 		$query = $this->DB->prepare('SELECT * FROM users WHERE username = :username ;');
 		$query->execute([':username' => $username]);
-		return $query->fetchAll(PDO::FETCH_CLASS, User::class)[0];
+		$user = $query->fetchAll(PDO::FETCH_CLASS, User::class);
+		if (sizeof($user) > 0) {
+			return $user[0];
+		} else {
+			throw new Exception('no user found');
+		}
 	}
 	
 	/**

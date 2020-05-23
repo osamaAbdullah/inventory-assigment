@@ -66,7 +66,7 @@ class User implements Auth\UserInterface
 		$this->password = password_hash($password, PASSWORD_BCRYPT);
 	}
 	
-	public function hash(string $password)
+	public static function hash(string $password)
 	{
 		return password_hash($password, PASSWORD_BCRYPT);
 	}

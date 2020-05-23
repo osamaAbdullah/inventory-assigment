@@ -7,6 +7,7 @@
     "files": ["boot/Helpers/functions.php"]
   },
   "require": {
-    "jasny/auth": "^2.0"
+    "jasny/auth": "^2.0",
+    "rakit/validation": "^1.2"
   }
 }
