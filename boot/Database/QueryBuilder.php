@@ -2,6 +2,7 @@
 
 namespace Core\Database;
 
+use Exception;
 use PDO;
 
 class QueryBuilder {
@@ -9,18 +10,22 @@ class QueryBuilder {
 	/**
 	 * @var PDO
 	 */
-	private $db;
+	private $DB;
 	
 	public function __construct()
 	{
-		$this->db = Connection::connect();
+		$this->DB = Connection::connect();
 	}
 	
 	public function all(string $table)
 	{
-		$query = $this->db->prepare("select * from {$table}");
-		$query->execute();
-		return $query->fetchAll(PDO::FETCH_ASSOC);
+		$availableTables = ['users', 'sessions'];
+		if (in_array($table, $availableTables)) {
+			$query = $this->DB->prepare('SELECT * FROM ' . $table);
+			$query->execute();
+			return $query->fetchAll(PDO::FETCH_ASSOC);
+		}
+		throw new Exception('wrong input data');
 	}
 	
 	

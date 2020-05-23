@@ -2,7 +2,6 @@
 
 namespace Core;
 
-use function dd;
 use Exception;
 use function redirect;
 use function url;
@@ -27,12 +26,12 @@ class Router {
 		return new static;
 	}
 	
-	public function get($uri, $controller)
+	public static function get($uri, $controller)
 	{
 		static::$routes['GET'][trim($uri, '/')] = $controller;
 	}
 	
-	public function post($uri, $controller)
+	public static function post($uri, $controller)
 	{
 		static::$routes['POST'][trim($uri, '/')] = $controller;
 	}
