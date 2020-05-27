@@ -2,13 +2,15 @@
 
 namespace App\Controllers;
 
+
+use Core\Auth\AuthStorage;
+use Core\Interfaces\Authenticate;
 use Exception;
 use Jasny\Auth\Auth;
 use Jasny\Auth\Authz\Levels;
-use Core\Auth\AuthStorage;
 use Rakit\Validation\Validator;
 
-class AuthController {
+class AuthenticateController implements Authenticate {
 	
 	private $auth;
 	
@@ -38,9 +40,15 @@ class AuthController {
 				'errors' => [
 					'credential' => 'wrong username or password'
 				],
-				'oldUsername' => $_POST['username'],
+				'oldUsername' => $_POST['username'] ?? '',
 			]);
 		}
+		return redirect(url('/'));
+	}
+	
+	public function logout()
+	{
+		$this->auth->logout();
 		return redirect(url('/'));
 	}
 	
@@ -59,8 +67,9 @@ class AuthController {
 			$errors = $validation->errors()->toArray();
 			return view('login', [
 				'errors' => $errors,
-				'oldUsername' => $_POST['username'],
+				'oldUsername' => $_POST['username'] ?? '',
 			]);
+			
 		}
 	}
 	

@@ -8,6 +8,8 @@
   },
   "require": {
     "jasny/auth": "^2.0",
-    "rakit/validation": "^1.2"
+    "rakit/validation": "^1.2",
+    "firebase/php-jwt": "^5.2",
+    "nesbot/carbon": "^2.34"
   }
 }

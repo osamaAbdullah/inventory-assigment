@@ -8,19 +8,21 @@ class User implements Auth\UserInterface
 {
 	
 	private $id;
-	private $name;
+	private $first_name;
+	private $last_name;
 	private $username;
-	private $role_id;
+	private $type;
 	private $password;
 	private $created_at;
 	private $updated_at;
+	private $active;
 	
 /*	public function __debugInfo() {
 		return [
 			'id' => $this->id,
 			'name' => $this->name,
 			'username' => $this->username,
-			'role_id' => $this->role_id,
+			'type' => $this->type,
 			'password' => '********',
 			'created_at' => $this->created_at,
 			'updated_at' => $this->updated_at,
@@ -41,13 +43,26 @@ class User implements Auth\UserInterface
 		return $this->id;
 	}
 	
-	public function name(): string
+	public function id(): int
 	{
-		return $this->name;
+		return $this->id;
+	}
+	
+	public function first_name(): string
+	{
+		return $this->first_name;
+	}
+	public function last_name(): string
+	{
+		return $this->last_name;
 	}
 	public function username(): string
 	{
 		return $this->username;
+	}
+	public function type(): string
+	{
+		return $this->type;
 	}
 	public function created_at(): string
 	{
@@ -56,6 +71,10 @@ class User implements Auth\UserInterface
 	public function updated_at(): string
 	{
 		return $this->updated_at;
+	}
+	public function active(): int
+	{
+		return $this->active;
 	}
 	
 	/**
@@ -83,11 +102,16 @@ class User implements Auth\UserInterface
 	
 	public function getAuthRole(Auth\ContextInterface $context = null): int
 	{
-		return $this->role_id;
+		return $this->getRole();
 	}
 	
 	public function requiresMfa() : bool
 	{
 		return false;
+	}
+	
+	private function getRole() : int
+	{
+		return array_search($this->type, ['admin', 'developer', 'normal']) + 1;
 	}
 }

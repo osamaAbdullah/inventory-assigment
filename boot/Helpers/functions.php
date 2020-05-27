@@ -21,3 +21,23 @@ function url($path)
 {
 	return (require App::rootPath() . '/config/app.php')['root-url'] . $path;
 }
+
+function preventSQLInjections($inputStream)
+{
+	$inputStream = htmlspecialchars($inputStream);
+	if (sizeof(explode(' ', $inputStream)) === 1) {
+		return $inputStream;
+	} else {
+		throw new Exception('wrong input data');
+	}
+}
+
+function jsonResponse(array $arr, $statusCode)
+{
+	// set response code
+	http_response_code($statusCode);
+	
+	// send error messages
+	echo json_encode($arr);
+	exit;
+}

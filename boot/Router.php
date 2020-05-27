@@ -3,8 +3,6 @@
 namespace Core;
 
 use Exception;
-use function redirect;
-use function url;
 
 class Router {
 	
@@ -23,6 +21,7 @@ class Router {
 	public static function register()
 	{
 		require_once '../app/Routes/web.php';
+		require_once '../app/Routes/api.php';
 		return new static;
 	}
 	
