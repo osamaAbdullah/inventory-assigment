@@ -41,11 +41,10 @@ trait VerifyToken {
 		}
 	}
 	
-	private function isLoggedIn()
+	public function isLoggedIn()
 	{
-		session_start();
-		if ($this->validateJWT()['valid']) {
-			if (isset($_SESSION['auth']) && intval($_SESSION['auth']['user']) === $this->validateJWT()['data']['id']) {
+		if ($this->validateJWT()['valid'] && isLoggedIn()) {
+			if (intval($_SESSION['auth']['user']) === $this->validateJWT()['data']['id']) {
 				return true;
 			}
 		}
@@ -58,5 +57,4 @@ trait VerifyToken {
 		]);
 		exit;
 	}
-	
 }

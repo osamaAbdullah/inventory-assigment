@@ -23,7 +23,9 @@ abstract class Auth implements Authenticate {
 	{
 		$levels = new Levels(['user' => 1, 'developer' => 2, 'admin' => 3]);
 		$auth = new Authentication($levels, new AuthStorage());
-		session_start();
+		if(!isset($_SESSION)) {
+			session_start();
+		}
 		$auth->initialize();
 		$this->auth = $auth;
 	}

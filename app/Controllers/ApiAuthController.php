@@ -3,27 +3,15 @@
 namespace App\Controllers;
 
 use App\Traits\VerifyToken;
+use Core\Abstracts\Auth as Authenticate;
 use Core\App;
-use Core\Interfaces\Authenticate;
 use Exception;
-use Jasny\Auth\Auth;
-use Jasny\Auth\Authz\Levels;
-use Core\Auth\AuthStorage;
 use Rakit\Validation\Validator;
 use Firebase\JWT\JWT;
 
-class ApiAuthController implements Authenticate {
+class ApiAuthController extends Authenticate {
 	
 	use VerifyToken;
-	
-	private $auth;
-	
-	public function __construct()
-	{
-		if (! $this->auth) {
-			$this->initialize();
-		}
-	}
 	
 	public function logout()
 	{
@@ -81,15 +69,15 @@ class ApiAuthController implements Authenticate {
 			jsonResponse([
 				'message' => 'Login failed.',
 				'errors' => $validation->errors()->toArray(),
-			], 401);
+			], 422);
 		}
 	}
 	
 	private function generateToken()
 	{
 		$user = $this->auth->user();
-		
-		App::resolve('jwt')['token']['data'] = [
+		$jwtConf = App::resolve('jwt');
+		$jwtConf['token']['data'] = [
 			'id' => $user->id(),
 			'name' => $user->first_name() .' '. $user->last_name(),
 			'username' => $user->username(),
@@ -99,25 +87,11 @@ class ApiAuthController implements Authenticate {
 		]; // append user data
 		
 		// generate jwt
-		$jwt = JWT::encode(App::resolve('jwt')['token'], App::resolve('jwt')['key'], 'HS256');
+		$jwt = JWT::encode($jwtConf['token'], $jwtConf['key'], 'HS256');
 		
 		jsonResponse([ // respond
 			"message" => "Successful login.",
 			"jwt" => $jwt
 		], 200);
-	}
-	
-	public function isLoggedIn()
-	{
-		return $this->auth->isLoggedIn();
-	}
-	
-	public function initialize()
-	{
-		$levels = new Levels(['user' => 1, 'developer' => 2, 'admin' => 3]);
-		$auth = new Auth($levels, new AuthStorage());
-		session_start();
-		$auth->initialize();
-		$this->auth = $auth;
 	}
 }
