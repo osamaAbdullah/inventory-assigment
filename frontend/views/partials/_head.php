@@ -5,5 +5,5 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="<?= url('/js/app.js'); ?>"></script>
     <link href="<?= url('/css/app.css'); ?>" type="text/css" rel="stylesheet">
-	<title>Document</title>
+	<title>Inventory Assignment</title>
 </head>

@@ -2,32 +2,15 @@
 
 namespace App\Controllers;
 
-
-use Core\Auth\AuthStorage;
-use Core\Interfaces\Authenticate;
 use Exception;
-use Jasny\Auth\Auth;
-use Jasny\Auth\Authz\Levels;
 use Rakit\Validation\Validator;
+use Core\Abstracts\Auth as Authenticate;
 
-class AuthenticateController implements Authenticate {
-	
-	private $auth;
-	
-	public function __construct()
-	{
-		if (! $this->auth) {
-			$this->initialize();
-		}
-	}
+class AuthController extends Authenticate {
 	
 	public function showLoginForm()
 	{
-		if ($this->isLoggedIn()) {
-			return redirect(url('/'));
-		} else {
-			return view('login');
-		}
+		return view('login');
 	}
 	
 	public function login()
@@ -64,27 +47,11 @@ class AuthenticateController implements Authenticate {
 		$validation->validate();
 		
 		if ($validation->fails()) {
-			$errors = $validation->errors()->toArray();
 			return view('login', [
-				'errors' => $errors,
+				'errors' => $validation->errors()->toArray(),
 				'oldUsername' => $_POST['username'] ?? '',
 			]);
 			
 		}
 	}
-	
-	public function isLoggedIn()
-	{
-		return $this->auth->isLoggedIn();
-	}
-	
-	public function initialize()
-	{
-		$levels = new Levels(['user' => 1, 'developer' => 2, 'admin' => 3]);
-		$auth = new Auth($levels, new AuthStorage());
-		session_start();
-		$auth->initialize();
-		$this->auth = $auth;
-	}
-	
 }

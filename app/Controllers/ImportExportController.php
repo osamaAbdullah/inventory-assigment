@@ -5,18 +5,16 @@ namespace App\Controllers;
 
 
 use Core\Auth\User;
-use Core\Database\QueryBuilder;
-use function dd;
 
 
-class TestsController {
+class ImportExportController extends Controller {
 	
 	public function test()
 	{
 		
 		
 		
-		dd(isLoggedIn());
+		dd(User::hash('11111111'));
 		
 		return view('home');
 	}

@@ -1,6 +1,8 @@
 <?php
 
+use App\Controllers\AuthController;
 use Core\App;
+use Core\Request;
 
 function dd($data) {
 	die(var_dump($data));
@@ -41,3 +43,18 @@ function jsonResponse(array $arr, $statusCode)
 	echo json_encode($arr);
 	exit;
 }
+
+function activeLink($page)
+{
+	if (strpos(Request::uri(), $page) !== false) {
+		echo ' active';
+	} else {
+		echo '';
+	}
+}
+
+function isLoggedIn()
+{
+	return (new AuthController)->isLoggedIn();
+}
+

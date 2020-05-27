@@ -2,18 +2,11 @@
 
 namespace App\Controllers;
 
-use function array_pop;
-use function basename;
-use Core\Database\QueryBuilder;
-use function dd;
-use function end;
-use function explode;
-
-class PagesController {
+class PagesController extends Controller {
 	
 	public function index()
 	{
-		return view('home');
+		return redirect(url('/dashboard'));
 	}
 	
 	public function notFound()

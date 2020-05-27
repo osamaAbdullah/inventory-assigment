@@ -4,7 +4,10 @@
       "App\\": "app/",
       "Core\\": "boot/"
     },
-    "files": ["boot/Helpers/functions.php"]
+    "files": [
+      "boot/Helpers/functions.php",
+      "boot/Helpers/importSqlFiles.php"
+    ]
   },
   "require": {
     "jasny/auth": "^2.0",

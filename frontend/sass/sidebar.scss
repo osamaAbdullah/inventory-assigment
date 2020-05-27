@@ -1,0 +1,51 @@
+#sidebar-div {
+  color: #2e4c6a;
+  font-family: sans-serif;
+  font-weight: bold;
+  background-color: #f6f6f6;
+  min-height: 100vh;
+  position: relative;
+}
+ul {
+  li {
+    list-style: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border-radius: 7px 0 0 7px;
+    user-select: none;
+  }
+}
+.remove-link-style {
+  color: #1e3e5e;
+  cursor: pointer;
+  text-decoration: none;
+  &:hover {
+    color: #1e3e5e;
+    text-decoration: none;
+  }
+}
+.active {
+  background-color: #ffffff;
+}
+#hr-div {
+  width: 95%;
+  margin: 0 2.5% 0 2.5%;
+  background-color: #767676;
+  height: 1px;
+}
+#username-div {
+  background-color: #ffffff;
+  /*cursor: pointer;*/
+  /*user-select: none;*/
+}
+#logout-div {
+  cursor: pointer;
+  user-select: none;
+  color: #dd4d4d;
+}
+#bottom-sidebar-div {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}

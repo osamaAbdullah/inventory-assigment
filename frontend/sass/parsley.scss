@@ -27,8 +27,16 @@ textarea.parsley-error {
   -o-transition: all .3s ease-in;
   -moz-transition: all .3s ease-in;
   -webkit-transition: all .3s ease-in;
+
+  li {
+    font-size: 0.8em;
+    font-style: italic;
+    cursor: text;
+  }
+
 }
 
 .parsley-errors-list.filled {
   opacity: 1;
 }
+
