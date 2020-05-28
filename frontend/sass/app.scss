@@ -1,8 +1,8 @@
-@import "variable";
+@import "custom/variable";
 @import '~bootstrap/scss/bootstrap';
-@import "~datatables.net-dt";
-@import "datatable";
-@import "parsley";
-@import 'login';
-@import 'sidebar';
+@import "plugins/parsley";
+@import "plugins/data-table/datatables-bootstrap";
+//@import "plugins/data-table/datatables-buttons-bootstrap";
+@import 'custom/login';
+@import 'custom/sidebar';
 

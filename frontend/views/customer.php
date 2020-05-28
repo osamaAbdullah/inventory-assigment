@@ -1,9 +1,5 @@
 <?php require_once 'partials/_header.php' ?>
 
-
-
-
-
 <div class="row">
 	<div class="col-12" style="padding: 50px">
 		<table id="customers-table" class="table table-striped table-bordered" style="width:100%">

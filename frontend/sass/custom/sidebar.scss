@@ -11,22 +11,24 @@
   background-color: $grayColor;
   min-height: 100vh;
   position: relative;
-}
-ul {
-  li {
-    list-style: none;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    user-select: none;
+  ul {
     background-color: $grayColor;
-    &:focus {
-      border-radius: 6px 0 0 6px;
-      background-color: #ffffff;
-    }
   }
-  background-color: $grayColor;
 }
+
+.sidebar-li-c {
+  list-style: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  background-color: $grayColor;
+  &:focus {
+    border-radius: 6px 0 0 6px;
+    background-color: #ffffff;
+  }
+}
+
 .remove-link-style {
   color: #1e3e5e;
   cursor: pointer;
