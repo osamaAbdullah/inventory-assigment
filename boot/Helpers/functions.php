@@ -21,7 +21,7 @@ function redirect($path)
 
 function url($path)
 {
-	return (require App::rootPath() . '/config/app.php')['root-url'] . $path;
+	return App::resolve('app')['root-url'] . (($path[0] === '/') ? $path : '/' . $path);
 }
 
 function preventSQLInjections($inputStream)
@@ -56,5 +56,10 @@ function activeLink($page)
 function isLoggedIn()
 {
 	return (new AuthController)->isLoggedIn();
+}
+
+function user()
+{
+	return (new AuthController)->user();
 }
 

@@ -1,8 +1,14 @@
+.sidebar-color {
+  background-color: $grayColor;
+}
+.height-10 {
+  height: 10px;
+}
 #sidebar-div {
   color: #2e4c6a;
   font-family: sans-serif;
   font-weight: bold;
-  background-color: #f6f6f6;
+  background-color: $grayColor;
   min-height: 100vh;
   position: relative;
 }
@@ -12,9 +18,14 @@ ul {
     width: 100%;
     margin: 0;
     padding: 0;
-    border-radius: 7px 0 0 7px;
     user-select: none;
+    background-color: $grayColor;
+    &:focus {
+      border-radius: 6px 0 0 6px;
+      background-color: #ffffff;
+    }
   }
+  background-color: $grayColor;
 }
 .remove-link-style {
   color: #1e3e5e;
@@ -26,6 +37,7 @@ ul {
   }
 }
 .active {
+  border-radius: 10px 0 0 10px;
   background-color: #ffffff;
 }
 #hr-div {
@@ -45,7 +57,6 @@ ul {
   color: #dd4d4d;
 }
 #bottom-sidebar-div {
-  position: absolute;
-  bottom: 0;
+
   width: 100%;
 }

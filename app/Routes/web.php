@@ -16,6 +16,8 @@ Router::get('/sell', 'SellController@index');
 Router::get('/report', 'ReportController@index');
 Router::get('/expense', 'ExpenseController@index');
 Router::get('/capital', 'CapitalController@index');
+Router::get('/customer', 'CustomerController@index');
+Router::get('/supplier', 'SupplierController@index');
 
 Router::get('/login', 'AuthController@showLoginForm');
 Router::post('/login', 'AuthController@login');

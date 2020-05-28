@@ -75,16 +75,8 @@ class ApiAuthController extends Authenticate {
 	
 	private function generateToken()
 	{
-		$user = $this->auth->user();
 		$jwtConf = App::resolve('jwt');
-		$jwtConf['token']['data'] = [
-			'id' => $user->id(),
-			'name' => $user->first_name() .' '. $user->last_name(),
-			'username' => $user->username(),
-			'type' => $user->type(),
-			'active' => $user->active(),
-			
-		]; // append user data
+		$jwtConf['token']['data'] = $this->user(); // append user data
 		
 		// generate jwt
 		$jwt = JWT::encode($jwtConf['token'], $jwtConf['key'], 'HS256');

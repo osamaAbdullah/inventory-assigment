@@ -37,6 +37,11 @@ class Router {
 	
 	public function trigger()
 	{
+		if (!isset(static::$routes[Request::method()])) {
+			jsonResponse([
+				'Whoops not allowed method'
+			], 500);
+		}
 		if (array_key_exists(Request::uri(), static::$routes[Request::method()])) {
 			return $this->fireAction(
 				...
@@ -46,8 +51,14 @@ class Router {
 				)
 			);
 		}
+		if (Request::method() === 'GET') {
+			return redirect(url('/page-not-found'));
+		} else {
+			jsonResponse([
+				'Whoops looks like you get lost'
+			], 404);
+		}
 		
-		return redirect(url('/page-not-found'));
 //		throw new Exception('no Routes defined for this uri');
 	}
 	

@@ -2,23 +2,24 @@
 
 namespace App\Controllers;
 
-
-
-use Core\Auth\User;
-use Core\Database\QueryBuilder;
-use function dd;
-
+use function array_push;
+use Core\App;
+use function import;
+use function url;
+use function user;
+use function var_dump;
 
 class TestsController {
 	
 	public function test()
 	{
+		var_dump(user()['name']);
 		
+		exit;
 		
+		dd();
 		
-		dd(isLoggedIn());
-		
-		return view('home');
+		echo 'osama';
 	}
 	
 }

@@ -4,10 +4,8 @@ namespace Core\Auth;
 
 use Core\Database\Connection;
 use Exception;
-use function htmlspecialchars;
 use Jasny\Auth;
 use PDO;
-use function sizeof;
 
 class AuthStorage implements Auth\StorageInterface
 {
@@ -23,7 +21,7 @@ class AuthStorage implements Auth\StorageInterface
 	public function fetchUserById(string $id): ?Auth\UserInterface
 	{
 		$query = $this->DB->prepare('SELECT * FROM users WHERE id = :id ;');
-		$query->execute([':id' => htmlspecialchars(intval($id))]);
+		$query->execute([':id' => preventSQLInjections($id)]);
 		$user = $query->fetchAll(PDO::FETCH_CLASS, User::class);
 		if (sizeof($user) > 0) {
 			return $user[0];
@@ -38,7 +36,7 @@ class AuthStorage implements Auth\StorageInterface
 	public function fetchUserByUsername(string $username): ?Auth\UserInterface
 	{
 		$query = $this->DB->prepare('SELECT * FROM users WHERE username = :username LIMIT 0, 1;');
-		$query->execute([':username' => htmlspecialchars($username)]);
+		$query->execute([':username' => preventSQLInjections($username)]);
 		$user = $query->fetchAll(PDO::FETCH_CLASS, User::class);
 		
 		if (sizeof($user) > 0) {

@@ -5,14 +5,15 @@
       "Core\\": "boot/"
     },
     "files": [
-      "boot/Helpers/functions.php",
-      "boot/Helpers/importSqlFiles.php"
+      "boot/Helpers/functions.php"
     ]
   },
   "require": {
     "jasny/auth": "^2.0",
     "rakit/validation": "^1.2",
     "firebase/php-jwt": "^5.2",
-    "nesbot/carbon": "^2.34"
+    "nesbot/carbon": "^2.34",
+    "portphp/portphp": "^1.4",
+    "portphp/csv": "^1.1"
   }
 }
