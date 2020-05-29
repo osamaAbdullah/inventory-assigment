@@ -5,48 +5,44 @@
 		<table id="customers-table" class="table table-striped table-bordered" style="width:100%">
 			<thead>
 				<tr>
-					<th>name</th><th>name</th><th>name</th><th>name</th><th>name</th>
+					<th>id</th>
+					<th>name</th>
+					<th>email</th>
+					<th>phone_number</th>
+					<th>address</th>
 				</tr>
 			</thead>
-			<tbody>
+            <tfoot>
 				<tr>
-					<td>osama</td><td>osama</td><td>osama</td><td>osama</td><td>osama</td>
-				</tr><tr>
-					<td>osama</td><td>osama</td><td>osama</td><td>osama</td><td>osama</td>
-				</tr><tr>
-					<td>osama</td><td>osama</td><td>osama</td><td>osama</td><td>osama</td>
-				</tr><tr>
-					<td>osama</td><td>osama</td><td>osama</td><td>osama</td><td>osama</td>
-				</tr><tr>
-					<td>osama</td><td>osama</td><td>osama</td><td>osama</td><td>osama</td>
-				</tr><tr>
-					<td>osama</td><td>osama</td><td>osama</td><td>osama</td><td>osama</td>
-				</tr><tr>
-					<td>osama</td><td>osama</td><td>osama</td><td>osama</td><td>osama</td>
-				</tr><tr>
-					<td>osama</td><td>osama</td><td>osama</td><td>osama</td><td>osama</td>
-				</tr><tr>
-					<td>osama</td><td>osama</td><td>osama</td><td>osama</td><td>osama</td>
-				</tr><tr>
-					<td>osama</td><td>osama</td><td>osama</td><td>osama</td><td>osama</td>
-				</tr><tr>
-					<td>osama</td><td>osama</td><td>osama</td><td>osama</td><td>osama</td>
-				</tr><tr>
-					<td>osama</td><td>osama</td><td>osama</td><td>osama</td><td>osama</td>
-				</tr><tr>
-					<td>osama</td><td>osama</td><td>osama</td><td>osama</td><td>osama</td>
-				</tr><tr>
-					<td>osama</td><td>osama</td><td>osama</td><td>osama</td><td>osama</td>
-				</tr><tr>
-					<td>osama</td><td>osama</td><td>osama</td><td>osama</td><td>osama</td>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>email</th>
+                    <th>phone_number</th>
+                    <th>address</th>
 				</tr>
-			</tbody>
+			</tfoot>
 		</table>
 	</div>
 </div>
 <script>
     $(document).ready( function () {
-        $('#customers-table').DataTable();
+
+        $('#customers-table').DataTable({
+            'processing': true,
+            'serverSide': true,
+            'serverMethod': 'GET',
+            'ajax': {
+                'url': '<?= url('/customer/get') ?>'
+            },
+            columns: [
+                { data: 'id' },
+                { data: 'name' },
+                { data: 'email' },
+                { data: 'phone_number' },
+                { data: 'address' },
+            ]
+        });
+        
     } );
 </script>
 <?php require_once 'partials/_footer.php' ?>
