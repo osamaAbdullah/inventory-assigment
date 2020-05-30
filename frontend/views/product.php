@@ -1,4 +1,5 @@
 <?php require_once 'partials/_header.php' ?>
+<?php $title = 'Product'; require_once 'partials/_navigation.php' ?>
 <div class="row">
 	<div class="col-12 p-5">
 		<table id="products-table" class="table table-striped table-bordered" style="width:100%">

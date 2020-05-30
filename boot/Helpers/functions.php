@@ -68,10 +68,24 @@ function generateToken()
 	return bin2hex(random_bytes(32));
 }
 
+function generateCSRFToken()
+{
+	if(!isset($_SESSION)) {
+		session_start();
+	}
+	$_SESSION['token'] = bin2hex(random_bytes(32));
+	return $_SESSION['token'];
+}
+
 function registerLog($txt)
 {
 	$myFile = fopen( App::rootPath() . '\\logs\\inventory.log', 'w');
 	fwrite($myFile, $txt);
 	fclose($myFile);
+}
+
+function setUrl($url)
+{
+	echo("<script>history.replaceState({},'','$url');</script>");
 }
 

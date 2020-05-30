@@ -27,15 +27,16 @@
                             </div>
                             ';
                     } ?>
+                    <?php $username_err = isset($errors) && array_key_exists('username', $errors); ?>
                     <div class="login-label">USERNAME</div>
                     <input type="text"
-                           class="login-input  <?= (isset($errors) && array_key_exists('username', $errors)) ? 'parsley-error' : '' ?>"
+                           class="login-input  <?= ($username_err) ? 'parsley-error' : '' ?>"
                            name="username"
                            placeholder="Username"
                            value="<?= $oldUsername ?? ''; ?>"
                            data-parsley-minlength="3"
                            data-parsley-required>
-                    <?php if ( isset($errors) && array_key_exists('username', $errors) ) {
+                    <?php if ( $username_err ) {
                         foreach ($errors['username'] as $key => $value) {
                             echo '
                                     <ul class="parsley-errors-list filled">
@@ -44,14 +45,15 @@
                                     ';
                         }
                     } ?>
+                    <?php $password_err = isset($errors) && array_key_exists('password', $errors); ?>
                     <div class="login-label mt-3">PASSWORD</div>
                     <input type="password"
-                           class="login-input login-password <?= (isset($errors) && array_key_exists('password', $errors)) ? 'parsley-error' : '' ?>"
+                           class="login-input login-password <?= ($password_err) ? 'parsley-error' : '' ?>"
                            name="password"
                            placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                            data-parsley-minlength="8"
                            data-parsley-required>
-                    <?php if ( isset($errors) && array_key_exists('password', $errors) ) {
+                    <?php if ( $password_err ) {
                         foreach ($errors['password'] as $key => $value) {
                             echo '
                             <ul class="parsley-errors-list filled">

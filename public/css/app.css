@@ -9994,3 +9994,32 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^=col-]:last-
   width: 100%;
 }
 
+.nav-div {
+  min-height: 41px;
+  background-color: #f6f6f6;
+  color: #1e3e5e;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.search-input {
+  border: solid 1px #1e3e5e;
+  border-radius: 50px;
+  font-size: 13px;
+  margin-top: 9px;
+  outline: none;
+  padding-right: 0;
+}
+
+.add-button {
+  width: 43px;
+  height: 24px;
+  border-radius: 25px;
+  font-size: 9px;
+  margin-top: 9px;
+  background-color: #1e3e5e;
+  color: #ffffff;
+}
+

@@ -1,4 +1,4 @@
-<?php require_once '_nav-b.php' ?>
+<?php require_once '_sidebar-b.php' ?>
 <script>
     
     let activeElement = $('.active');
