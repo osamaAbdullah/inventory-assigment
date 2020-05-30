@@ -10,6 +10,7 @@ use PDO;
 class AuthStorage implements Auth\StorageInterface
 {
 	private $DB;
+	
 	public function __construct()
 	{
 		$this->DB = Connection::connect();
@@ -39,7 +40,7 @@ class AuthStorage implements Auth\StorageInterface
 		$query->execute([':username' => preventSQLInjections($username)]);
 		$user = $query->fetchAll(PDO::FETCH_CLASS, User::class);
 		
-		if (sizeof($user) > 0) {
+		if (isset($user[0])) {
 			return $user[0];
 		} else {
 			throw new Exception('no user found');

@@ -20,7 +20,14 @@ class AuthController extends Authenticate {
 	
 	public function login()
 	{
-		$this->validate();
+		$validation = $this->validate();
+		if ($validation->fails()) {
+			return view('login', [
+				'errors' => $validation->errors()->toArray(),
+				'oldUsername' => $_POST['username'] ?? '',
+			]);
+		}
+		
 		try {
 			$this->auth->login($_POST['username'], $_POST['password']);
 		} catch (Exception $exception) {
@@ -51,12 +58,6 @@ class AuthController extends Authenticate {
 		
 		$validation->validate();
 		
-		if ($validation->fails()) {
-			return view('login', [
-				'errors' => $validation->errors()->toArray(),
-				'oldUsername' => $_POST['username'] ?? '',
-			]);
-			
-		}
+		return $validation;
 	}
 }

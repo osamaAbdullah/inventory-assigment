@@ -2,31 +2,33 @@
 
 namespace Core\Database;
 
-use function array_push;
 use Carbon\Carbon;
-use function dd;
 use Exception;
-use function explode;
-use function in_array;
 use PDO;
-use function preventSQLInjections;
-use function sizeof;
-use function uniqid;
 
 class QueryBuilder {
 	
-	/**
-	 * @var PDO
-	 */
 	private $DB;
 	private $query;
 	private $params = [];
 	const OPERATOR = ['=', '>', '<', '>=', '<=', '<>'];
 	const AVAILABLE_TABLES = [
 		'users',
-		'sessions',
+		'pictures',
+		'password_resets',
+		'items_transfer_detail',
+		'items_transfer',
+		'items_sell',
+		'items_receive_detail',
+		'items_receive',
+		'items_receive_picture',
+		'inventories',
+		'incomes',
 		'expenses',
 		'customers',
+		'customers_log',
+		'capital',
+		'items',
 	];
 
 	public function __construct()
@@ -79,6 +81,42 @@ class QueryBuilder {
 		}
 	}
 	
+	public function whereAfterBrackets(string $column, string $operator = '=', $value)
+	{
+		if (in_array($operator, static::OPERATOR)) {
+			$param = ':where' . uniqid();
+			$this->query .= ' `' . preventSQLInjections($column) . '` ' .
+				$operator . ' ' . $param . ' ';
+			$this->params[$param] = $value;
+			return $this;
+		} elseif ($operator === 'like') {
+			$param = ':where' . uniqid();
+			$this->query .= ' `' . preventSQLInjections($column) . '` like ' . $param . ' ';
+			$this->params[$param] = $value;
+			return $this;
+		} else {
+			throw new Exception('un available operator');
+		}
+	}
+	
+	public function andOpenBrackets()
+	{
+		$this->query .= ' AND (';
+		return $this;
+	}
+	
+	public function orOpenBrackets()
+	{
+		$this->query .= ' AND (';
+		return $this;
+	}
+	
+	public function closeBrackets()
+	{
+		$this->query .= ' )';
+		return $this;
+	}
+	
 	public function and(string $column, string $operator = '=', $value)
 	{
 		if (in_array($operator, static::OPERATOR)) {
@@ -121,9 +159,9 @@ class QueryBuilder {
 		return $this;
 	}
 	
-	public function paginate(int $limit, int $offset)
+	public function paginate(int $start, int $perpage)
 	{
-		$this->query .= "  LIMIT $limit, $offset ;";
+		$this->query .= "  LIMIT $start, $perpage ;";
 		return $this;
 	}
 	
@@ -132,6 +170,12 @@ class QueryBuilder {
 		$query = $this->DB->prepare($this->query);
 		$query->execute($this->params);
 		return $query->fetchAll(PDO::FETCH_ASSOC);
+	}
+	
+	public function execute()
+	{
+		$query = $this->DB->prepare($this->query);
+		return $query->execute($this->params);
 	}
 	
 	public function toSql()
@@ -198,10 +242,96 @@ class QueryBuilder {
 		throw new Exception('wrong input data');
 	}
 	
-
+	public function whereBetween(string $fromDate,string $toDate = null)
+	{
+		$toDate = isset($toDate) ? $toDate : Carbon::now()->toDateTimeString() ;
+		$this->query .= ' WHERE `created_at` > :from_date AND `created_at` < :to_date ;';
+		$this->params[':from_date'] = $fromDate;
+		$this->params[':to_date'] = $toDate;
+		return $this;
+	}
+	
+	public function andWhereBetween(string $fromDate,string $toDate = null)
+	{
+		$toDate = isset($toDate) ? $toDate : Carbon::now()->toDateTimeString() ;
+		$this->query .= ' AND  `created_at` > :from_date AND `created_at` < :to_date ;';
+		$this->params[':from_date'] = $fromDate;
+		$this->params[':to_date'] = $toDate;
+		return $this;
+	}
+	
+	public function lastXX(string $measuring,int $count = 1)
+	{
+		$measuring = preventSQLInjections($measuring);
+		$count = preventSQLInjections($count);
+		$this->query .= ' WHERE `created_at` >= NOW() - INTERVAL ' . $count . ' ' . $measuring . ' ';
+		return $this;
+	}
+	
+	public function andLastXX(string $measuring,int $count = 1)
+	{
+		$measuring = preventSQLInjections($measuring);
+		$count = preventSQLInjections($count);
+		$this->query .= ' AND `created_at` >= NOW() - INTERVAL ' . $count . ' ' . $measuring . ' ';
+		return $this;
+	}
+	
+	public function insert(string $table, array $keyValues)
+	{
+		if (in_array($table, static::AVAILABLE_TABLES)) {
+			$index = 1;
+			$keys = '';
+			$values = '';
+			$this->query .= 'INSERT INTO `' . $table . '` ';
+			foreach ($keyValues as $key => $value) {
+				$key = preventSQLInjections($key);
+				$param = ':where' . uniqid();
+				if (sizeof($keyValues) !== $index) {
+					$keys .= " `{$key}`, ";
+					$values .= " {$param}, ";
+					$this->params[$param] = $value;
+				} else {
+					$keys .= " `{$key}` ";
+					$values .= " {$param} ";
+					$this->params[$param] = $value;
+				}
+				$index++;
+			}
+			$this->query .= " ( $keys )  VALUES ( $values ) ";
+			return $this->execute();
+		}
+		throw new Exception('table "' . $table . '" not found');
+	}
+	
+	public function update(string $table, array $keyValues)
+	{
+		if (in_array($table, static::AVAILABLE_TABLES)) {
+			$index = 1;
+			$this->query .= 'UPDATE `' . $table . '` SET ';
+			foreach ($keyValues as $key => $value) {
+				$param = ':value' . uniqid();
+				if (sizeof($keyValues) !== $index) {
+					$this->query .= ' ' . preventSQLInjections($key) . ' = ' . $param . ', ';
+					$this->params[$param] = $value;
+				} else {
+					$this->query .= ' ' . preventSQLInjections($key) . ' = ' . $param . ' ';
+					$this->params[$param] = $value;
+				}
+				$index++;
+			}
+			
+			return $this;
+		}
+		throw new Exception('table "' . $table . '" not found');
+	}
+	
+	public function delete(string $table)
+	{
+		if (in_array($table, static::AVAILABLE_TABLES)) {
+			$this->query .= 'DELETE FROM `' . $table . '` ';
+			return $this;
+		}
+		throw new Exception('table "' . $table . '" not found');
+	}
 	
 }
-
-
-
-

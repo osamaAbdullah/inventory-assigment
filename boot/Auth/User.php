@@ -2,41 +2,21 @@
 
 namespace Core\Auth;
 
+use Core\Database\QueryBuilder;
 use Jasny\Auth;
 
 class User implements Auth\UserInterface
 {
-	
 	private $id;
 	private $first_name;
 	private $last_name;
 	private $username;
+	private $email;
 	private $type;
 	private $password;
 	private $created_at;
 	private $updated_at;
 	private $active;
-	
-/*	public function __debugInfo() {
-		return [
-			'id' => $this->id,
-			'name' => $this->name,
-			'username' => $this->username,
-			'type' => $this->type,
-			'password' => '********',
-			'created_at' => $this->created_at,
-			'updated_at' => $this->updated_at,
-		];
-	}*/
-	
-//	public static function __set_state($an_array)
-//	{
-//		return [
-//
-//			'password' => '********',
-//
-//		];
-//	}
 	
 	public function getAuthId(): string
 	{
@@ -60,6 +40,10 @@ class User implements Auth\UserInterface
 	{
 		return $this->username;
 	}
+	public function email(): string
+	{
+		return $this->email;
+	}
 	public function type(): string
 	{
 		return $this->type;
@@ -77,12 +61,15 @@ class User implements Auth\UserInterface
 		return $this->active;
 	}
 	
-	/**
-	 * {@interal This method isn't required by the interface}}.
-	 */
-	public function changePassword(string $password): void
+	public function changePassword(string $password): bool
 	{
 		$this->password = password_hash($password, PASSWORD_BCRYPT);
+		return (new QueryBuilder)
+			->update('users', [
+				'password' => $this->password
+			])
+			->where('username', '=', $this->username)
+			->execute();
 	}
 	
 	public static function hash(string $password)

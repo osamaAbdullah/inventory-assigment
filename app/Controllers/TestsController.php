@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use function array_push;
+use Carbon\Carbon;
 use Core\App;
 use Core\Database\QueryBuilder;
 use function import;
@@ -14,17 +15,21 @@ class TestsController {
 	
 	public function test()
 	{
-		
+
 		$customers = (new QueryBuilder)
-			->select(['id', 'name', 'email', 'phone_number', 'address'])
-			->table('customers')
-			->where('type', '=', 'customer')
-			->and('name', 'like', 'hotmail')
-			->or('email', 'like', '%hotmail%')
-			->or('phone_number', 'like', 'hotmail')
-			->or('address', 'like', 'hotmail')
-			->get();
+			->delete('expenses')
+			->where('id', '=', '1')
+			->execute();
 		dd($customers);
+		
+//		$query = (new QueryBuilder)
+//			->insert('password_resets', [
+//				'username'   => 'aaaaaaaaaaaaaaaa',
+//				'token'      => 'aaaaaaaaaaaaaaaaa',
+//				'created_at' => Carbon::now(),
+//			]);
+//
+//		dd($query);
 	
 	}
 	

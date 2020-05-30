@@ -5,7 +5,6 @@ namespace App\Controllers;
 use App\Traits\VerifyToken;
 use Carbon\Carbon;
 use Core\Database\QueryBuilder;
-use function jsonResponse;
 
 class ApiTransactionsReport {
 	

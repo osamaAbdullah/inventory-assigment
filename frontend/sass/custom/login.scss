@@ -26,6 +26,10 @@
   letter-spacing: 10px;
   font-weight: normal;
 }
+.password-reset-text {
+  letter-spacing: 3px;
+  font-weight: normal;
+}
 .login-label {
   width: 100%;
   font-size: 0.7em;
@@ -52,6 +56,7 @@
   height: 33px;
   border: none;
   width: 100%;
+  cursor: pointer;
 }
 .login-submit-btn:focus {
   outline: none;

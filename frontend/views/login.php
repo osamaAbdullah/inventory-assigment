@@ -12,8 +12,17 @@
                     <?php if ( isset($errors) && array_key_exists('credential', $errors) ) {
                         echo '
                             <div class="mb-3">
-                                <ul class="parsley-errors-list filled text-center">
+                                <ul class="parsley-errors-list parsley-error-alert filled text-center">
                                     <li class="parsley-required">' . $errors['credential'] . '</li>
+                                </ul>
+                            </div>
+                            ';
+                    } ?>
+                    <?php if ( isset($success) ) {
+                        echo '
+                            <div class="mb-3">
+                                <ul class="parsley-success-list parsley-success-alert filled text-center">
+                                    <li class="parsley-required">' . $success . '</li>
                                 </ul>
                             </div>
                             ';
@@ -52,7 +61,7 @@
                             }
                         } ?>
                     <div class="mt-2 text-right forget-password-link">
-                        <a href="#">Forgot your password?</a>
+                        <a href="<?= url('/password-reset-request') ?>">Forgot your password?</a>
                     </div>
                     <button type="submit" class="login-submit-btn mb-4 mt-2">LOGIN</button>
                 </form>

@@ -23,7 +23,6 @@ class CustomerController extends Controller {
 		$columnSortOrder = $_REQUEST['order'][0]['dir']; // asc or desc
 		$searchTerm = $_REQUEST['search']['value']; // Search value
 		
-		
 ## Total number of records without filtering
 		$totalCount = (new QueryBuilder)
 			->count()
@@ -39,10 +38,12 @@ class CustomerController extends Controller {
 		if ($searchTerm !== '') {
 			$searchTerm = "%{$searchTerm}%";
 			$filteredRecords
-				->and('name', 'like', $searchTerm)
+				->andOpenBrackets()
+				->whereAfterBrackets('name', 'like', $searchTerm)
 				->or('email', 'like', $searchTerm)
 				->or('phone_number', 'like', $searchTerm)
-				->or('address', 'like', $searchTerm);
+				->or('address', 'like', $searchTerm)
+				->closeBrackets();
 		}
 		$filteredRecords = $filteredRecords->get()[0]['count'];
 		
@@ -54,24 +55,24 @@ class CustomerController extends Controller {
 			if ($searchTerm !== '') {
 				$searchTerm = "%{$searchTerm}%";
 				$customers
-					->and('name', 'like', $searchTerm)
+					->andOpenBrackets()
+					->whereAfterBrackets('name', 'like', $searchTerm)
 					->or('email', 'like', $searchTerm)
 					->or('phone_number', 'like', $searchTerm)
-					->or('address', 'like', $searchTerm);
+					->or('address', 'like', $searchTerm)
+					->closeBrackets();
 			}
 		$customers = $customers
 			->orderBy($columnName, $columnSortOrder)
 			->paginate($row, $perpage)
 			->get();
 		
-		$response = [
+		echo json_encode([
 			"draw"                 => intval($draw),
 			"iTotalRecords"        => $totalRecords,
 			"iTotalDisplayRecords" => $filteredRecords,
 			"aaData"                 => $customers,
-		];
-		
-		echo json_encode($response);
+		]);
 		
 	}
 	

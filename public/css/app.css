@@ -9550,6 +9550,35 @@ textarea.parsley-error {
   cursor: text;
 }
 
+.parsley-error-alert {
+  background-color: #F2DEDE;
+  padding: 2px 0 2px 0;
+}
+
+.parsley-success-alert {
+  background-color: #DFF0D8;
+  padding: 2px 0 2px 0;
+}
+
+.parsley-success-list {
+  margin: 2px 0 3px;
+  padding: 0;
+  list-style-type: none;
+  font-size: 0.9em;
+  line-height: 0.9em;
+  color: #468847;
+  transition: all 0.3s ease-in;
+  -o-transition: all 0.3s ease-in;
+  -moz-transition: all 0.3s ease-in;
+  -webkit-transition: all 0.3s ease-in;
+}
+
+.parsley-success-list li {
+  font-size: 0.8em;
+  font-style: italic;
+  cursor: text;
+}
+
 .parsley-errors-list.filled {
   opacity: 1;
 }
@@ -9834,6 +9863,11 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^=col-]:last-
   font-weight: normal;
 }
 
+.password-reset-text {
+  letter-spacing: 3px;
+  font-weight: normal;
+}
+
 .login-label {
   width: 100%;
   font-size: 0.7em;
@@ -9863,6 +9897,7 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^=col-]:last-
   height: 33px;
   border: none;
   width: 100%;
+  cursor: pointer;
 }
 
 .login-submit-btn:focus {

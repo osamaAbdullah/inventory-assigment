@@ -63,3 +63,15 @@ function user()
 	return (new AuthController)->user();
 }
 
+function generateToken()
+{
+	return bin2hex(random_bytes(32));
+}
+
+function registerLog($txt)
+{
+	$myFile = fopen( App::rootPath() . '\\logs\\inventory.log', 'w');
+	fwrite($myFile, $txt);
+	fclose($myFile);
+}
+
