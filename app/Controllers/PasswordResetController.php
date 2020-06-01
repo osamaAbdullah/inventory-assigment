@@ -6,13 +6,8 @@ use Carbon\Carbon;
 use Core\App;
 use Core\Auth\AuthStorage;
 use Core\Database\QueryBuilder;
-use function dd;
 use Exception;
-use function generateToken;
-use function log;
 use Rakit\Validation\Validator;
-use function redirect;
-use function url;
 
 class PasswordResetController {
 	

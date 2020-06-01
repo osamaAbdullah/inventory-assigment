@@ -8,5 +8,5 @@ interface Authenticate {
 	public function isLoggedIn();
 	public function user();
 	public function isActive();
-	public function role();
+	public function type();
 }

@@ -52,6 +52,7 @@ abstract class Auth implements Authenticate {
 			'name' => $user->first_name() .' '. $user->last_name(),
 			'username' => $user->username(),
 			'type' => $user->type(),
+			'roles' => $user->roles(),
 			'active' => $user->active(),
 		];
 	}
@@ -61,7 +62,7 @@ abstract class Auth implements Authenticate {
 		return $this->user()['active'];
 	}
 	
-	public function role()
+	public function type()
 	{
 		return $this->user()['type'];
 	}

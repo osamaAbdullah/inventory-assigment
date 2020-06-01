@@ -9,5 +9,6 @@ try {
 require('parsleyjs');
 require('./plugins/data-table/jquery-datatable');
 require('./plugins/data-table/datatables-bootstrap');
+require('chart.js')
 // require('./plugins/data-table/buttons');
 // require('./plugins/data-table/buttons-bootstrap');

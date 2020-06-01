@@ -13,7 +13,8 @@ class ExpenseController extends Controller {
 	
 	public function index()
 	{
-		$this->role('admin');
+		$this->type(['admin', 'developer', 'normal']);
+		$this->normalUserRole('can-see-expenses');
 		return view('expense', [
 			'token' => generateCSRFToken(),
 		]);
@@ -21,6 +22,8 @@ class ExpenseController extends Controller {
 	
 	public function save()
 	{
+		$this->type(['admin', 'developer', 'normal']);
+		$this->normalUserRole('can-create-expenses');
 		if ( isset($_POST['_token']) && hash_equals($_SESSION['token'], $_POST['_token']) ) {
 			$validator = new Validator;
 			$validation = $validator->make(
@@ -176,6 +179,8 @@ class ExpenseController extends Controller {
 	
 	public function update()
 	{
+		$this->type(['admin', 'developer', 'normal']);
+		$this->normalUserRole('can-update-expenses');
 		if ( isset($_POST['_token']) && hash_equals($_SESSION['token'], $_POST['_token']) ) {
 			$validator = new Validator;
 			$validation = $validator->make(
@@ -238,6 +243,8 @@ class ExpenseController extends Controller {
 	
 	public function delete()
 	{
+		$this->type(['admin', 'developer', 'normal']);
+		$this->normalUserRole('can-delete-expenses');
 		if ( isset($_POST['_token']) && hash_equals($_SESSION['token'], $_POST['_token']) && isset($_POST['id'])) {
 			if (
 			(new QueryBuilder)

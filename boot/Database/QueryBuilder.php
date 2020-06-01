@@ -31,7 +31,7 @@ class QueryBuilder {
 		'items',
 		// views
 		'items_receive_view',
-		
+		'items_sell_view',
 	];
 
 	public function __construct()
@@ -179,6 +179,13 @@ class QueryBuilder {
 	{
 		$query = $this->DB->prepare($this->query);
 		return $query->execute($this->params);
+	}
+	
+	public function rawSelectQuery(string $query, array $param)
+	{
+		$query = $this->DB->prepare($query);
+		$query->execute($param);
+		return $query->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
 	public function toSql()

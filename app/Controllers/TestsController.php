@@ -2,14 +2,7 @@
 
 namespace App\Controllers;
 
-use function array_push;
-use Carbon\Carbon;
-use Core\App;
 use Core\Database\QueryBuilder;
-use function import;
-use function url;
-use function user;
-use function var_dump;
 
 class TestsController {
 	

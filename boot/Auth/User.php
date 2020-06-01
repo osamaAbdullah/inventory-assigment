@@ -13,6 +13,7 @@ class User implements Auth\UserInterface
 	private $username;
 	private $email;
 	private $type;
+	private $roles;
 	private $password;
 	private $created_at;
 	private $updated_at;
@@ -59,6 +60,10 @@ class User implements Auth\UserInterface
 	public function active(): int
 	{
 		return $this->active;
+	}
+	public function roles(): array
+	{
+		return (array) json_decode($this->roles);
 	}
 	
 	public function changePassword(string $password): bool
