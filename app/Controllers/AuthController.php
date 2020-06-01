@@ -5,8 +5,6 @@ namespace App\Controllers;
 use Exception;
 use Rakit\Validation\Validator;
 use Core\Abstracts\Auth as Authenticate;
-use function redirect;
-use function url;
 
 class AuthController extends Authenticate {
 	

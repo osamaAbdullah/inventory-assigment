@@ -29,6 +29,9 @@ class QueryBuilder {
 		'customers_log',
 		'capital',
 		'items',
+		// views
+		'items_receive_view',
+		
 	];
 
 	public function __construct()

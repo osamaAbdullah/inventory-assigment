@@ -8,6 +8,7 @@ Router::get('/import-sql-files', 'TestsController@test');
 
 Router::get('/', 'PagesController@index');
 Router::get('/page-not-found', 'PagesController@notFound');
+Router::get('/forbidden-403', 'PagesController@forbidden');
 Router::get('/dashboard', 'DashboardController@index');
 Router::get('/product', 'ProductController@index');
 Router::get('/product/get', 'ProductController@get');
@@ -16,6 +17,10 @@ Router::get('/transmit', 'TransmitController@index');
 Router::get('/sell', 'SellController@index');
 Router::get('/report', 'ReportController@index');
 Router::get('/expense', 'ExpenseController@index');
+Router::get('/expense/get', 'ExpenseController@get');
+Router::post('/expense/get-row', 'ExpenseController@getRow');
+Router::post('/expense/update', 'ExpenseController@update');
+Router::post('/expense/delete', 'ExpenseController@delete');
 Router::post('/expense/save', 'ExpenseController@save');
 Router::get('/capital', 'CapitalController@index');
 Router::get('/customer', 'CustomerController@index');

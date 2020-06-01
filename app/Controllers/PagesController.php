@@ -14,4 +14,9 @@ class PagesController {
 		return view('404');
 	}
 	
+	public function forbidden()
+	{
+		return view('403');
+	}
+	
 }

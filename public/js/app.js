@@ -4706,6 +4706,17 @@ $jscomp.polyfill("Array.prototype.find", function (f) {
 
 /***/ }),
 
+/***/ "./frontend/sass/custom/403.scss":
+/*!***************************************!*\
+  !*** ./frontend/sass/custom/403.scss ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /*!*****************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
@@ -57183,14 +57194,15 @@ module.exports = function(module) {
 /***/ }),
 
 /***/ 0:
-/*!***********************************************************!*\
-  !*** multi ./frontend/js/app.js ./frontend/sass/app.scss ***!
-  \***********************************************************/
+/*!*******************************************************************************************!*\
+  !*** multi ./frontend/js/app.js ./frontend/sass/app.scss ./frontend/sass/custom/403.scss ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! C:\Users\osama\xampp\htdocs\projects\inventory-assignment\frontend\js\app.js */"./frontend/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\osama\xampp\htdocs\projects\inventory-assignment\frontend\sass\app.scss */"./frontend/sass/app.scss");
+__webpack_require__(/*! C:\Users\osama\xampp\htdocs\projects\inventory-assignment\frontend\sass\app.scss */"./frontend/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\osama\xampp\htdocs\projects\inventory-assignment\frontend\sass\custom\403.scss */"./frontend/sass/custom/403.scss");
 
 
 /***/ })

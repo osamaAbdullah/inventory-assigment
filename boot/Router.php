@@ -35,6 +35,16 @@ class Router {
 		static::$routes['POST'][trim($uri, '/')] = $controller;
 	}
 	
+	public static function delete($uri, $controller)
+	{
+		static::$routes['DELETE'][trim($uri, '/')] = $controller;
+	}
+	
+	public static function put($uri, $controller)
+	{
+		static::$routes['PUT'][trim($uri, '/')] = $controller;
+	}
+	
 	public function trigger()
 	{
 		if (!isset(static::$routes[Request::method()])) {

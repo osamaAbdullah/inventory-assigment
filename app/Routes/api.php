@@ -9,3 +9,8 @@ Router::post('/api/get-total-income-expense', 'ApiTransactionsReport@getTotalInc
 Router::get('/api/get-all-suppliers', 'ApiSuppliersReport@getAllSuppliers');
 Router::get('/api/get-all-customers', 'ApiCustomersReport@getAllCustomers');
 
+Router::post('/api/expense/save', 'ApiExpenses@save');
+Router::post('/api/expense/update', 'ApiExpenses@update');
+
+Router::get('/api/items/get-expired', 'ApiItemsExpirationReport@getExpired');
+

@@ -9837,6 +9837,14 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^=col-]:last-
   width: 100%;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.color-red {
+  color: darkred;
+}
+
 .login-background-div {
   display: flex;
   background-color: #f6f6f6;
@@ -10018,7 +10026,7 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^=col-]:last-
   height: 24px;
   border-radius: 25px;
   font-size: 9px;
-  margin-top: 9px;
+  margin-top: -4px;
   background-color: #1e3e5e;
   color: #ffffff;
 }

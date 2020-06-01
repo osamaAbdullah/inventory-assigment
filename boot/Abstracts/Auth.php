@@ -56,4 +56,13 @@ abstract class Auth implements Authenticate {
 		];
 	}
 	
+	public function isActive()
+	{
+		return $this->user()['active'];
+	}
+	
+	public function role()
+	{
+		return $this->user()['type'];
+	}
 }
